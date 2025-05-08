@@ -1,109 +1,120 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>🍌 Happy Birthday Banana 🍌</title>
+  <meta charset="UTF-8" />
+  <title>Happy Birthday Banana!</title>
   <style>
     body {
-      background: #fffbe6;
-      font-family: 'Comic Sans MS', sans-serif;
+      font-family: "Comic Sans MS", cursive, sans-serif;
+      background-color: #fffbe6;
       text-align: center;
       padding: 50px;
-      overflow-x: hidden;
     }
-
     h1 {
-      color: #ffbf00;
-      font-size: 3em;
-      animation: shake 1s infinite;
+      color: #ffcc00;
+      font-size: 3rem;
     }
-
-    .banana {
-      width: 200px;
-      cursor: pointer;
-      transition: transform 0.4s;
-    }
-
-    .banana:hover {
-      transform: rotate(360deg) scale(1.2);
-    }
-
-    .message {
-      display: none;
-      margin-top: 30px;
-      font-size: 1.5em;
-      color: #3b3b3b;
-    }
-
-    .button {
-      margin-top: 40px;
+    button {
+      margin: 10px;
       padding: 15px 30px;
-      font-size: 1.2em;
-      background: #ffde59;
+      font-size: 1.2rem;
       border: none;
-      border-radius: 10px;
+      border-radius: 12px;
+      background-color: #ffe135;
       cursor: pointer;
-      transition: background 0.3s;
+      box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+      transition: transform 0.2s ease;
+    }
+    button:hover {
+      background-color: #ffdd44;
+      transform: scale(1.05);
     }
 
-    .button:hover {
-      background: #ffc107;
-    }
-
-    @keyframes shake {
-      0% { transform: rotate(0); }
-      25% { transform: rotate(3deg); }
-      50% { transform: rotate(-3deg); }
-      75% { transform: rotate(3deg); }
-      100% { transform: rotate(0); }
-    }
-
-    .easter-egg {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      width: 30px;
-      height: 30px;
-      background: transparent;
-      cursor: pointer;
-    }
-
-    #secretMessage {
+    /* Modal styles */
+    .modal {
       display: none;
-      margin-top: 20px;
-      color: #ff4081;
-      font-weight: bold;
+      position: fixed;
+      z-index: 999;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0,0,0,0.5);
+    }
+    .modal-content {
+      background-color: white;
+      margin: 15% auto;
+      padding: 30px;
+      border-radius: 15px;
+      width: 80%;
+      max-width: 400px;
+      position: relative;
+      animation: pop 0.3s ease-out;
+    }
+    @keyframes pop {
+      0% { transform: scale(0.7); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    .close {
+      position: absolute;
+      top: 10px; right: 20px;
+      font-size: 24px;
+      cursor: pointer;
+      color: red;
     }
   </style>
 </head>
 <body>
 
-  <h1>🍌 Happy Birthday Banana 🍌</h1>
+  <h1>🎉 Happy Birthday, Banana (a.k.a. 1/2 of 30) 🍌</h1>
+  <p>You’re officially in your twenties... aging like a ripe banana 😂</p>
 
-  <img src="https://upload.wikimedia.org/wikipedia/commons/8/8a/Banana-Single.jpg" alt="Banana" class="banana" id="bananaImg">
+  <button onclick="showModal('fact')">🍌 Banana Fact</button>
+  <button onclick="showModal('joke')">😂 Banana Joke</button>
+  <button onclick="showModal('gift')">🎁 Surprise Gift</button>
+  <button onclick="showModal('game')">🎮 Mini Game</button>
+  <button onclick="showModal('song')">🎵 Play Birthday Song</button>
 
-  <p class="message" id="msg">You just clicked a magical banana... 🎉</p>
+  <!-- Modal -->
+  <div id="popup" class="modal" onclick="hideModal()">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <span class="close" onclick="hideModal()">&times;</span>
+      <p id="popupText"></p>
+    </div>
+  </div>
 
-  <button class="button" onclick="revealMessage()">Reveal Secret</button>
-
-  <p id="secretMessage">You're the best banana ever. 🩷 Stay funny, stay chaotic. - From your анда 🍌</p>
-
-  <div class="easter-egg" onclick="alert('🍌 YOU FOUND THE SECRET BANANA BUTTON! 🍌')"></div>
+  <!-- Audio -->
+  <audio id="birthdaySong" src="https://www2.cs.uic.edu/~i101/SoundFiles/HappyBirthday.wav"></audio>
 
   <script>
-    const banana = document.getElementById('bananaImg');
-    const msg = document.getElementById('msg');
-    banana.addEventListener('click', () => {
-      msg.style.display = 'block';
-      banana.style.transform = 'scale(1.5) rotate(720deg)';
-      setTimeout(() => {
-        banana.style.transform = 'rotate(0deg) scale(1)';
-      }, 1000);
-    });
+    function showModal(type) {
+      const popup = document.getElementById("popup");
+      const popupText = document.getElementById("popupText");
 
-    function revealMessage() {
-      const secret = document.getElementById('secretMessage');
-      secret.style.display = 'block';
+      let message = "";
+      switch(type) {
+        case "fact":
+          message = "Bananas are technically berries... and so are you 🍓🍌!";
+          break;
+        case "joke":
+          message = "Why did the banana go to the party? Because it was a-peeling! 😂";
+          break;
+        case "gift":
+          message = "Surprise! You get unlimited hugs, love, and one banana emoji per day. 🍌💛";
+          break;
+        case "game":
+          message = "Coming soon: Banana Clicker 3000™ 🎮 Just kidding... or am I?";
+          break;
+        case "song":
+          message = "Now playing: 🎵 Happy Birthday to you... 🍌";
+          document.getElementById("birthdaySong").play();
+          break;
+      }
+
+      popupText.textContent = message;
+      popup.style.display = "block";
+    }
+
+    function hideModal() {
+      document.getElementById("popup").style.display = "none";
     }
   </script>
 
