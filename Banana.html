@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>🍌 Happy Birthday Banana 🍌</title>
+  <style>
+    body {
+      background: #fffbe6;
+      font-family: 'Comic Sans MS', sans-serif;
+      text-align: center;
+      padding: 50px;
+      overflow-x: hidden;
+    }
+
+    h1 {
+      color: #ffbf00;
+      font-size: 3em;
+      animation: shake 1s infinite;
+    }
+
+    .banana {
+      width: 200px;
+      cursor: pointer;
+      transition: transform 0.4s;
+    }
+
+    .banana:hover {
+      transform: rotate(360deg) scale(1.2);
+    }
+
+    .message {
+      display: none;
+      margin-top: 30px;
+      font-size: 1.5em;
+      color: #3b3b3b;
+    }
+
+    .button {
+      margin-top: 40px;
+      padding: 15px 30px;
+      font-size: 1.2em;
+      background: #ffde59;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .button:hover {
+      background: #ffc107;
+    }
+
+    @keyframes shake {
+      0% { transform: rotate(0); }
+      25% { transform: rotate(3deg); }
+      50% { transform: rotate(-3deg); }
+      75% { transform: rotate(3deg); }
+      100% { transform: rotate(0); }
+    }
+
+    .easter-egg {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      width: 30px;
+      height: 30px;
+      background: transparent;
+      cursor: pointer;
+    }
+
+    #secretMessage {
+      display: none;
+      margin-top: 20px;
+      color: #ff4081;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🍌 Happy Birthday Banana 🍌</h1>
+
+  <img src="https://upload.wikimedia.org/wikipedia/commons/8/8a/Banana-Single.jpg" alt="Banana" class="banana" id="bananaImg">
+
+  <p class="message" id="msg">You just clicked a magical banana... 🎉</p>
+
+  <button class="button" onclick="revealMessage()">Reveal Secret</button>
+
+  <p id="secretMessage">You're the best banana ever. 🩷 Stay funny, stay chaotic. - From your анда 🍌</p>
+
+  <div class="easter-egg" onclick="alert('🍌 YOU FOUND THE SECRET BANANA BUTTON! 🍌')"></div>
+
+  <script>
+    const banana = document.getElementById('bananaImg');
+    const msg = document.getElementById('msg');
+    banana.addEventListener('click', () => {
+      msg.style.display = 'block';
+      banana.style.transform = 'scale(1.5) rotate(720deg)';
+      setTimeout(() => {
+        banana.style.transform = 'rotate(0deg) scale(1)';
+      }, 1000);
+    });
+
+    function revealMessage() {
+      const secret = document.getElementById('secretMessage');
+      secret.style.display = 'block';
+    }
+  </script>
+
+</body>
+</html>
